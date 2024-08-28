@@ -1,4 +1,5 @@
 import {
+  Alert,
   FlatList,
   Text,
   TextInput,
@@ -23,11 +24,27 @@ export function Home() {
   ];
 
   function handleParticipantAdd() {
-    console.log('Participant added!');
+    if (participants.includes('Marcelo')) {
+      return Alert.alert(
+        'Invalid name',
+        'There is already a participant on the list with this name.'
+      );
+    }
   }
 
-  function handleParticipanRemove() {
-    console.log('Participant removed!');
+  function handleParticipanRemove(name: string) {
+    Alert.alert('Remove', `Do you like to remove the participant: ${name}?`, [
+      {
+        text: 'Yes',
+        onPress: () => {
+          Alert.alert('Removed!', `The participant: ${name} was removed.`);
+        },
+      },
+      {
+        text: 'No',
+        style: 'cancel',
+      },
+    ]);
   }
 
   return (
@@ -51,7 +68,11 @@ export function Home() {
         data={participants}
         keyExtractor={(item) => item}
         renderItem={({ item }) => (
-          <Participant name={item} onRemove={handleParticipanRemove} />
+          <Participant
+            key={item}
+            name={item}
+            onRemove={() => handleParticipanRemove(item)}
+          />
         )}
         ListEmptyComponent={
           <Text style={styles.listEmptyText}>No participants yet.</Text>
