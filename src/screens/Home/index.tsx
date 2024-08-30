@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
   Alert,
   FlatList,
@@ -10,26 +11,19 @@ import { Participant } from '../../components/Participant';
 import { styles } from './styles';
 
 export function Home() {
-  const participants = [
-    'Marcelo',
-    'Flavia',
-    'Didio',
-    'Giovanna',
-    'Luis',
-    'Dri',
-    'Gabriel',
-    'Manu',
-    'Aramis',
-    'Diane',
-  ];
+  const [participants, setParticipants] = useState<string[]>([]);
+  const [participantName, setParticipantName] = useState('');
 
   function handleParticipantAdd() {
-    if (participants.includes('Marcelo')) {
+    if (participants.includes(participantName)) {
       return Alert.alert(
         'Invalid name',
         'There is already a participant on the list with this name.'
       );
     }
+
+    setParticipants((prevState) => [...prevState, participantName]);
+    setParticipantName('');
   }
 
   function handleParticipanRemove(name: string) {
@@ -57,6 +51,8 @@ export function Home() {
           style={styles.input}
           placeholder="Participant's name"
           placeholderTextColor="#6B6B6B"
+          value={participantName}
+          onChangeText={setParticipantName}
         />
 
         <TouchableOpacity style={styles.button} onPress={handleParticipantAdd}>
