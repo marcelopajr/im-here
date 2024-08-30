@@ -45,7 +45,7 @@ export function Home() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.eventName}>Event Name</Text>
+      <Text style={styles.eventName}>Front-End Day</Text>
       <Text style={styles.eventDate}>
         {moment().format('dddd, MMMM Do YYYY')}
       </Text>
