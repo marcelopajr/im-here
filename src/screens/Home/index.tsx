@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import moment from 'moment';
 import { Participant } from '../../components/Participant';
 import { styles } from './styles';
 
@@ -45,7 +46,9 @@ export function Home() {
   return (
     <View style={styles.container}>
       <Text style={styles.eventName}>Event Name</Text>
-      <Text style={styles.eventDate}>Tuesday, 27th August 2024</Text>
+      <Text style={styles.eventDate}>
+        {moment().format('dddd, MMMM Do YYYY')}
+      </Text>
 
       <View style={styles.form}>
         <TextInput
